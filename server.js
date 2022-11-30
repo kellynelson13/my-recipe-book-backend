@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
     res.send('test')
 })
 
-//////// Index Route //////////
+//////// Appetizers Index Route //////////
 app.get('/appetizers', async (req, res) => {
     try {
         // send all apps
@@ -43,6 +43,16 @@ app.get('/appetizers', async (req, res) => {
     }
 })
 
+/////// Appetizers Create Route ////////
+app.post("/appetizers", async (req, res) => {
+    try {
+        // send all apps
+        res.json(await Appetizers.create(req.body));
+    } catch (error) {
+        //send error
+        res.status(400).json(error);
+    }
+});
 
 
 
