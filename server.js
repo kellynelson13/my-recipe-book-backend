@@ -5,6 +5,7 @@ require('dotenv').config();
 const cors = require("cors");
 const mongoose = require('mongoose');
 const appsController = require('./controllers/appetizers');
+const entreesController = require('./controllers/entrees');
 
 
 
@@ -12,6 +13,7 @@ const appsController = require('./controllers/appetizers');
 app.use(cors()); // to prevent cors errors, open access to all origins
 app.use(express.json()); // parse json bodies
 app.use('/appetizers', appsController);
+app.use('/entrees', entreesController);
 
 
 /////// Database Connection /////////
