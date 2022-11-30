@@ -5,6 +5,12 @@ require('dotenv').config();
 const cors = require("cors");
 const mongoose = require('mongoose');
 
+const Appetizers = require('./models/appetizers');
+
+///////Middleware/////////
+app.use(cors()); // to prevent cors errors, open access to all origins
+app.use(express.json()); // parse json bodies
+
 /////// Database Connection /////////
 mongoose.connect(process.env.DATABASE_URL, {
 	useNewUrlParser: true,
@@ -22,8 +28,8 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 /////// Routes ////////////
 
 ////// Index /////////
-app.get('/recipes', (req, res) => {
-    res.send('index page')
+app.get('/', (req, res) => {
+    res.send('test')
 })
 
 //////Create /////////
