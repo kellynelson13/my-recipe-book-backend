@@ -4,12 +4,15 @@ const app = express();
 require('dotenv').config();
 const cors = require("cors");
 const mongoose = require('mongoose');
+const appsController = require('./controllers/appetizers');
 
-const Appetizers = require('./models/appetizers');
+
 
 ///////Middleware/////////
 app.use(cors()); // to prevent cors errors, open access to all origins
 app.use(express.json()); // parse json bodies
+app.use('/appetizers', appsController);
+
 
 /////// Database Connection /////////
 mongoose.connect(process.env.DATABASE_URL, {
@@ -25,59 +28,6 @@ db.on('connected', () => console.log('mongo connected'));
 db.on('disconnected', () => console.log('mongo disconnected'));
 
 
-/////// Routes ////////////
-
-////// test route /////////
-app.get('/', (req, res) => {
-    res.send('test')
-})
-
-//////// Appetizers Index Route //////////
-app.get('/appetizers', async (req, res) => {
-    try {
-        // send all apps
-        res.json(await Appetizers.find({}));
-    } catch (error) {
-        //send error
-        res.status(400).json(error);
-    }
-});
-
-////////// Appetizers Delete Route //////////
-app.delete("/appetizers/:id", async (req, res) => {
-    try {
-      // send all apps
-      res.json(await Appetizers.findByIdAndRemove(req.params.id));
-    } catch (error) {
-      //send error
-      res.status(400).json(error);
-    }
-  });
-
-/////// Appetizers Update Route /////////
-app.put("/appetizers/:id", async (req, res) => {
-    try {
-      // send all apps
-      res.json(
-        await Appetizers.findByIdAndUpdate(req.params.id, req.body, { new: true })
-      );
-    } catch (error) {
-      //send error
-      res.status(400).json(error);
-    }
-  });
-
-
-/////// Appetizers Create Route ////////
-app.post("/appetizers", async (req, res) => {
-    try {
-        // send all apps
-        res.json(await Appetizers.create(req.body));
-    } catch (error) {
-        //send error
-        res.status(400).json(error);
-    }
-});
 
 
 
