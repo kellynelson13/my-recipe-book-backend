@@ -41,7 +41,32 @@ app.get('/appetizers', async (req, res) => {
         //send error
         res.status(400).json(error);
     }
-})
+});
+
+////////// Appetizers Delete Route //////////
+app.delete("/appetizers/:id", async (req, res) => {
+    try {
+      // send all apps
+      res.json(await Appetizers.findByIdAndRemove(req.params.id));
+    } catch (error) {
+      //send error
+      res.status(400).json(error);
+    }
+  });
+
+/////// Appetizers Update Route /////////
+app.put("/appetizers/:id", async (req, res) => {
+    try {
+      // send all apps
+      res.json(
+        await Appetizers.findByIdAndUpdate(req.params.id, req.body, { new: true })
+      );
+    } catch (error) {
+      //send error
+      res.status(400).json(error);
+    }
+  });
+
 
 /////// Appetizers Create Route ////////
 app.post("/appetizers", async (req, res) => {
@@ -53,6 +78,7 @@ app.post("/appetizers", async (req, res) => {
         res.status(400).json(error);
     }
 });
+
 
 
 
