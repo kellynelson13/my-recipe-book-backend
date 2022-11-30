@@ -27,15 +27,23 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 
 /////// Routes ////////////
 
-////// Index /////////
+////// test route /////////
 app.get('/', (req, res) => {
     res.send('test')
 })
 
-//////Create /////////
-app.post('/recipes', (req, res) => {
-    res.send('received')
+//////// Index Route //////////
+app.get('/appetizers', async (req, res) => {
+    try {
+        // send all apps
+        res.json(await Appetizers.find({}));
+    } catch (error) {
+        //send error
+        res.status(400).json(error);
+    }
 })
+
+
 
 
 
