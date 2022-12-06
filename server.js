@@ -6,6 +6,7 @@ const cors = require("cors");
 const mongoose = require('mongoose');
 const appsController = require('./controllers/appetizers');
 const entreesController = require('./controllers/entrees');
+const dessertsController = require('./controllers/desserts');
 
 
 
@@ -14,6 +15,7 @@ app.use(cors()); // to prevent cors errors, open access to all origins
 app.use(express.json()); // parse json bodies
 app.use('/appetizers', appsController);
 app.use('/entrees', entreesController);
+app.use('/desserts', dessertsController);
 
 
 /////// Database Connection /////////
